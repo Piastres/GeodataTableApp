@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".activities.LoginActivity"
+    android:background="@color/colorWhite">
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="400dp"
+        android:layout_gravity="top"
+        android:contentDescription="@string/app_name"
+        android:src="@drawable/login_activity_background"
+        android:layout_marginBottom="20dp" />
+    <LinearLayout
+        android:layout_width="320dp"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:showDividers="middle"
+        android:divider="@drawable/divider8p"
+        android:layout_gravity="center_horizontal">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="25dp"
+            android:text="@string/login_activity_label"
+            android:textSize="@dimen/text_title_size"
+            android:fontFamily="@font/corsagrotesk_regular"
+            android:textStyle="bold"
+            android:textAlignment="center"
+            android:textAllCaps="true"
+            android:textColor="@color/colorAccent"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/edit_text_layout_height"
+            android:orientation="horizontal">
+            <ImageView
+                style="@style/LoginIcon"
+                android:src="@drawable/ic_user"/>
+            <EditText
+                style="@style/LoginEditText"
+                android:inputType="text"
+                android:autofillHints="@string/login_activity_login" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/edit_text_layout_height"
+            android:orientation="horizontal"
+            android:layout_marginBottom="45dp">
+            <ImageView
+                style="@style/LoginIcon"
+                android:src="@drawable/ic_key"/>
+            <EditText
+                style="@style/LoginEditText"
+                android:inputType="textPassword"
+                android:autofillHints="@string/login_activity_password"  />
+        </LinearLayout>
+        <Button
+            android:layout_width="120dp"
+            android:layout_height="@dimen/edit_text_layout_height"
+            android:layout_gravity="center_horizontal"
+            android:textColor="@color/colorWhite"
+            android:textStyle="bold"
+            android:text="@string/login_activity_button"
+            android:background="@drawable/login_activity_round_button"/>
+    </LinearLayout>
+</LinearLayout>

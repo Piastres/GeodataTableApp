@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">GeodataTableApp</string>
+    <string name="login_activity_login">Логин</string>
+    <string name="login_activity_password">Пароль</string>
+    <string name="login_activity_button">Войти</string>
+    <string name="login_activity_label">С возвращением</string>
+    <string name="geodata_list_activity_img">Фото</string>
+    <string name="ic_gps">&#xf3c5;</string>
+</resources>
