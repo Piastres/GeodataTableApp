@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".fragments.LoginErrorFragment">
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        app:contentPadding="@dimen/margin_bottom_20p"
+        android:padding="@dimen/cardview_default_elevation"
+        android:layout_height="wrap_content" >
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:showDividers="middle"
+            android:divider="@drawable/divider8p"
+            android:orientation="vertical">
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/edit_text_layout_height"
+                android:layout_marginBottom="@dimen/margin_bottom_20p"
+                android:src="@drawable/ic_close" />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal"
+                android:text="@string/login_error"
+                style="@style/GeodataItemTitle"/>
+            <TextView
+                android:id="@+id/requestErrorTitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal"
+                android:layout_marginBottom="@dimen/margin_bottom_20p" />
+            <Button
+                android:id="@+id/requestErrorDialogButton"
+                style="@style/ButtonWithoutBackground"
+                android:textColor="@color/colorPrimaryDark"
+                android:text="@string/login_ok"
+                android:background="@drawable/login_error_round_button" />
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+</RelativeLayout>

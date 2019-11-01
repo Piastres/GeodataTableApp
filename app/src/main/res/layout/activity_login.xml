@@ -9,13 +9,13 @@
 
     <ImageView
         android:layout_width="match_parent"
-        android:layout_height="400dp"
+        android:layout_height="@dimen/login_activity_img_height"
         android:layout_gravity="top"
         android:contentDescription="@string/app_name"
         android:src="@drawable/login_activity_background"
-        android:layout_marginBottom="20dp" />
+        android:layout_marginBottom="@dimen/margin_bottom_20p" />
     <LinearLayout
-        android:layout_width="320dp"
+        android:layout_width="@dimen/error_login_fragment_width"
         android:layout_height="match_parent"
         android:orientation="vertical"
         android:showDividers="middle"
@@ -24,7 +24,7 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="25dp"
+            android:layout_marginBottom="@dimen/margin_bottom_20p"
             android:text="@string/login_activity_label"
             android:textSize="@dimen/text_title_size"
             android:fontFamily="@font/corsagrotesk_regular"
@@ -32,6 +32,11 @@
             android:textAlignment="center"
             android:textAllCaps="true"
             android:textColor="@color/colorAccent"/>
+        <ProgressBar
+            android:id="@+id/loginProgressBar"
+            android:visibility="gone"
+            android:layout_width="25sp"
+            android:layout_height="25sp"/>
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="@dimen/edit_text_layout_height"
@@ -40,6 +45,7 @@
                 style="@style/LoginIcon"
                 android:src="@drawable/ic_user"/>
             <EditText
+                android:id="@+id/loginActivityLogin"
                 style="@style/LoginEditText"
                 android:inputType="text"
                 android:autofillHints="@string/login_activity_login" />
@@ -49,21 +55,20 @@
             android:layout_width="match_parent"
             android:layout_height="@dimen/edit_text_layout_height"
             android:orientation="horizontal"
-            android:layout_marginBottom="45dp">
+            android:layout_marginBottom="@dimen/margin_bottom_45p">
             <ImageView
                 style="@style/LoginIcon"
                 android:src="@drawable/ic_key"/>
             <EditText
+                android:id="@+id/loginActivityPassword"
                 style="@style/LoginEditText"
                 android:inputType="textPassword"
                 android:autofillHints="@string/login_activity_password"  />
         </LinearLayout>
         <Button
-            android:layout_width="120dp"
-            android:layout_height="@dimen/edit_text_layout_height"
-            android:layout_gravity="center_horizontal"
+            android:id="@+id/loginActivityButton"
+            style="@style/ButtonWithoutBackground"
             android:textColor="@color/colorWhite"
-            android:textStyle="bold"
             android:text="@string/login_activity_button"
             android:background="@drawable/login_activity_round_button"/>
     </LinearLayout>

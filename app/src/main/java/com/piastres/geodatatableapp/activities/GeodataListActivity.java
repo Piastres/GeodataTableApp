@@ -16,9 +16,29 @@ public class GeodataListActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_geodata_list);
 
+        String code = "";
+        if (getIntent().getExtras() != null) {
+            getIntent().getExtras().getString("USER_CODE");
+        }
+
         RecyclerView recyclerView = findViewById(R.id.geodataList);
         GeodataListAdapter adapter = new GeodataListAdapter();
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
+            @Override
+            public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
+                //nothing to do
+            }
+
+            @Override
+            public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
+
+                if (newState == RecyclerView.SCROLL_STATE_IDLE) {
+
+                }
+                super.onScrollStateChanged(recyclerView, newState);
+            }
+        });
     }
 }

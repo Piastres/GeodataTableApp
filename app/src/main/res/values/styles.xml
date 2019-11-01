@@ -1,6 +1,7 @@
 <resources>
 
     <!-- Base application theme. -->
+<!--    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">-->
     <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/colorPrimary</item>
@@ -10,12 +11,20 @@
     <style name="LoginEditText">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">45dp</item>
+        <item name="android:paddingStart">@dimen/edittext_padding</item>
+        <item name="android:paddingEnd">@dimen/edittext_padding</item>
         <item name="android:background">@drawable/login_activity_round_edit_text</item>
     </style>
     <style name="LoginIcon">
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:layout_gravity">center_vertical</item>
+    </style>
+    <style name="ButtonWithoutBackground">
+        <item name="android:layout_width">@dimen/button_width120p</item>
+        <item name="android:layout_height">@dimen/edit_text_layout_height</item>
+        <item name="android:layout_gravity">center_horizontal</item>
+        <item name="android:textStyle">bold</item>
     </style>
     <style name="GeodataItemTitle">
         <item name="android:layout_width">match_parent</item>
