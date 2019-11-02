@@ -12,7 +12,7 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 public class ConnectionController {
-    public static String BASE_URL = "http://www.alarstudios.com/test";
+    public static String BASE_URL = "http://www.alarstudios.com/test/";
 
     public static ApiService getApi() {
 
@@ -21,7 +21,6 @@ public class ConnectionController {
                 .readTimeout(30, TimeUnit.SECONDS)
                 .writeTimeout(30, TimeUnit.SECONDS)
                 .build();
-
 
         Gson gson = new GsonBuilder()
                 .setLenient()

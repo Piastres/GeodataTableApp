@@ -1,20 +1,28 @@
 package com.piastres.geodatatableapp.models;
 
+import com.google.gson.annotations.Expose;
+import com.google.gson.annotations.SerializedName;
+
 public class LoginRequest {
-    private String login;
+
+    @SerializedName("username")
+    @Expose
+    private String username;
+    @SerializedName("password")
+    @Expose
     private String password;
 
-    public LoginRequest(String login, String password) {
-        this.login = login;
+    public LoginRequest(String username, String password) {
+        this.username = username;
         this.password = password;
     }
 
-    public String getLogin() {
-        return login;
+    public String getUsername() {
+        return username;
     }
 
-    public void setLogin(String login) {
-        this.login = login;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     public String getPassword() {

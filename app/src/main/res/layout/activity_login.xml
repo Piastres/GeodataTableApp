@@ -45,7 +45,7 @@
                 style="@style/LoginIcon"
                 android:src="@drawable/ic_user"/>
             <EditText
-                android:id="@+id/loginActivityLogin"
+                android:id="@+id/loginActivityUsername"
                 style="@style/LoginEditText"
                 android:inputType="text"
                 android:autofillHints="@string/login_activity_login" />

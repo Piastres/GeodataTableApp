@@ -22,7 +22,7 @@ public class GeodataListActivity extends AppCompatActivity {
         }
 
         RecyclerView recyclerView = findViewById(R.id.geodataList);
-        GeodataListAdapter adapter = new GeodataListAdapter();
+        GeodataListAdapter adapter = new GeodataListAdapter(this);
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
