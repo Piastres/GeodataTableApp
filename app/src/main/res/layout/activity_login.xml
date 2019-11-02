@@ -40,10 +40,14 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="@dimen/edit_text_layout_height"
-            android:orientation="horizontal">
-            <ImageView
-                style="@style/LoginIcon"
-                android:src="@drawable/ic_user"/>
+            android:orientation="horizontal"
+            android:showDividers="middle"
+            android:divider="@drawable/divider8p">
+            <TextView
+                android:id="@+id/loginActivityUserIcon"
+                style="@style/TextIconStyle"
+                android:text="@string/ic_user"
+                android:textColor="@color/colorPrimaryDark" />
             <EditText
                 android:id="@+id/loginActivityUsername"
                 style="@style/LoginEditText"
@@ -55,10 +59,17 @@
             android:layout_width="match_parent"
             android:layout_height="@dimen/edit_text_layout_height"
             android:orientation="horizontal"
-            android:layout_marginBottom="@dimen/margin_bottom_45p">
-            <ImageView
-                style="@style/LoginIcon"
-                android:src="@drawable/ic_key"/>
+            android:layout_marginBottom="@dimen/margin_bottom_45p"
+            android:showDividers="middle"
+            android:divider="@drawable/divider8p">
+            <TextView
+                android:id="@+id/loginActivityKeyIcon"
+                style="@style/TextIconStyle"
+                android:text="@string/ic_key"
+                android:textColor="@color/colorPrimaryDark" />
+<!--            <ImageView-->
+<!--                style="@style/LoginIcon"-->
+<!--                android:src="@drawable/ic_key"/>-->
             <EditText
                 android:id="@+id/loginActivityPassword"
                 style="@style/LoginEditText"

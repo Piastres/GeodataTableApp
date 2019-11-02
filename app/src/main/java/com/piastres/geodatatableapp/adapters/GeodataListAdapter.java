@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -17,14 +18,27 @@ import com.bumptech.glide.load.DecodeFormat;
 import com.bumptech.glide.request.RequestOptions;
 import com.piastres.geodatatableapp.R;
 import com.piastres.geodatatableapp.activities.GeodataListActivity;
+import com.piastres.geodatatableapp.models.Datum;
+
+import java.math.BigDecimal;
+import java.math.RoundingMode;
+import java.util.List;
 
 public class GeodataListAdapter extends
         RecyclerView.Adapter<GeodataListAdapter.ViewHolder> {
 
     private GeodataListActivity activity;
+    private List<Datum> datumList;
+    private ListAdapterListener mListener;
 
-    public GeodataListAdapter (Activity activity){
+    public GeodataListAdapter (Activity activity, List<Datum> datumList, ListAdapterListener mListener){
         this.activity = (GeodataListActivity) activity;
+        this.datumList = datumList;
+        this.mListener = mListener;
+    }
+
+    public interface ListAdapterListener {
+        void onClickSwitch(int position);
     }
 
     @NonNull
@@ -41,9 +55,10 @@ public class GeodataListAdapter extends
                                  int position) {
         Typeface font = Typeface.createFromAsset(holder.itemView.getContext()
                 .getAssets(), "fa_solid.ttf" );
+        holder.textIcon.setTypeface(font);
 
         String IMG_URL = "https://github.com/Piastres/geodata-table-app/blob/master/app/src/main/res/drawable/user_photo.jpg?raw=true";
-        new RequestOptions();
+
         Glide.with(activity)
                 .load(IMG_URL)
                 .apply(RequestOptions
@@ -51,25 +66,61 @@ public class GeodataListAdapter extends
                         .format(DecodeFormat.PREFER_ARGB_8888)
                         .priority(Priority.HIGH))
                 .into(holder.image);
-        holder.textIcon.setTypeface(font);
+
+        Datum datum = datumList.get(position);
+        String coordinates = getRoundedDouble(datum.getLat()) + ", "
+                                                + getRoundedDouble(datum.getLon());
+
+        holder.textTitle.setText(datum.getName());
+        holder.textCordinates.setText(coordinates);
+
+        holder.layout.setOnClickListener(v -> {
+            mListener.onClickSwitch(position);
+        });
+
+//        if (position == datumList.size() - 1) {
+//            holder.viewLine.setVisibility(View.INVISIBLE);
+//        }
     }
 
     @Override
     public int getItemCount() {
-        return 10;
+        if (datumList == null) {
+            return 0;
+        }
+        return datumList.size();
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder {
+    class ViewHolder extends RecyclerView.ViewHolder {
+        LinearLayout layout;
         ImageView image;
         TextView textTitle;
         TextView textCordinates;
         TextView textIcon;
-        public ViewHolder(@NonNull View itemView) {
+        View viewLine;
+
+        ViewHolder(@NonNull View itemView) {
             super(itemView);
+            layout = itemView.findViewById(R.id.geodataItemLayout);
             image = itemView.findViewById(R.id.geodataItemImg);
             textTitle = itemView.findViewById(R.id.geodataItemTitle);
             textCordinates = itemView.findViewById(R.id.geodataItemCoordinates);
             textIcon = itemView.findViewById(R.id.geodataListItemIcon);
+            viewLine = itemView.findViewById(R.id.geodataItemLine);
         }
+    }
+
+    private double getRoundedDouble(double value) {
+        BigDecimal convertedToBigDecimal = new BigDecimal(Double.toString(value));
+        convertedToBigDecimal = convertedToBigDecimal.setScale(4,
+                                                                    RoundingMode.HALF_UP);
+
+        return convertedToBigDecimal.doubleValue();
+    }
+
+    public void dataChanged(List<Datum> changedDatumList){
+        datumList.clear();
+        datumList.addAll(changedDatumList);
+        notifyDataSetChanged();
     }
 }

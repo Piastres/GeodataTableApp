@@ -12,7 +12,7 @@ import java.net.SocketTimeoutException;
 
 import retrofit2.HttpException;
 
-public class CheckError {
+public class ErrorDescriptor {
     public String checkError(Throwable error) throws IOException, JSONException {
         String str = "Попробуйте позже";
 

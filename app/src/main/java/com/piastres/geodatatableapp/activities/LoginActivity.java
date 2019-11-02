@@ -2,17 +2,19 @@ package com.piastres.geodatatableapp.activities;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.piastres.geodatatableapp.R;
 import com.piastres.geodatatableapp.controllers.ConnectionController;
-import com.piastres.geodatatableapp.errors.CheckError;
+import com.piastres.geodatatableapp.errors.ErrorDescriptor;
 import com.piastres.geodatatableapp.fragments.LoginErrorFragment;
 import com.piastres.geodatatableapp.fragments.RequestErrorFragment;
 import com.piastres.geodatatableapp.models.LoginResponse;
@@ -27,17 +29,23 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        final String EMPTY_LOGIN_FORM = "Заполните все поля";
+        Typeface font = Typeface.createFromAsset(getAssets(), "fa_solid.ttf" );
 
         EditText textUsername = findViewById(R.id.loginActivityUsername);
         EditText textPassword = findViewById(R.id.loginActivityPassword);
         Button buttonLogin = findViewById(R.id.loginActivityButton);
+        TextView textIconUser = findViewById(R.id.loginActivityUserIcon);
+        TextView textIconKey = findViewById(R.id.loginActivityKeyIcon);
+
+        textIconKey.setTypeface(font);
+        textIconUser.setTypeface(font);
 
         buttonLogin.setOnClickListener(v -> {
             String username = String.valueOf(textUsername.getText());
             String password = String.valueOf(textPassword.getText());
             if (isLoginFromEmpty(username, password)) {
-                showErrorDialogFragment(EMPTY_LOGIN_FORM);
+                String emptyForm = getResources().getString(R.string.login_empty_form);
+                showErrorDialogFragment(emptyForm);
             } else {
                 getAuth(username, password);
             }
@@ -53,8 +61,8 @@ public class LoginActivity extends AppCompatActivity {
                 .subscribe(this::saveData
                         ,
                     error -> {
-                        CheckError checkError = new CheckError();
-                        showErrorDialogFragment(checkError.checkError(error));
+                        ErrorDescriptor errorDescriptor = new ErrorDescriptor();
+                        showErrorDialogFragment(errorDescriptor.checkError(error));
                     }
                 );
     }
@@ -69,9 +77,9 @@ public class LoginActivity extends AppCompatActivity {
             LoginErrorFragment loginErrorFragment = new LoginErrorFragment();
             loginErrorFragment.show(getSupportFragmentManager(), "fragment_login_error");
         } else {
-            Intent intent = new Intent(this, GeodataListActivity.class);
+            Intent intent = new Intent(getBaseContext(), GeodataListActivity.class);
             Bundle bundle = new Bundle();
-            bundle.putSerializable("USER_CODE", loginResponse.getCode());
+            bundle.putString("USER_CODE", loginResponse.getCode());
             intent.putExtras(bundle);
             this.startActivity(intent);
         }

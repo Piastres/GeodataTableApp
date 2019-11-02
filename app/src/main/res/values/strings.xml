@@ -5,11 +5,12 @@
     <string name="login_activity_button">Войти</string>
     <string name="login_activity_label">С возвращением</string>
     <string name="geodata_list_activity_img">Фото</string>
-    <string name="ic_gps">&#xf3c5;</string>
+    <string name="geodata_list_activity_title">Список геоданных</string>
     <string name="login_error">Ошибка доступа!</string>
     <string name="login_error_description">Неверный логин или пароль</string>
     <string name="login_ok">Ок</string>
-
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="login_empty_form">Заполните все поля</string>
+    <string name="ic_gps">&#xf3c5;</string>
+    <string name="ic_user">&#xf007;</string>
+    <string name="ic_key">&#xf084;</string>
 </resources>
