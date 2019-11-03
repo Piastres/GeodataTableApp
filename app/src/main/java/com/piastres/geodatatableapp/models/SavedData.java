@@ -32,4 +32,10 @@ public class SavedData {
     public void setDatumList(List<Datum> datumList) {
         this.datumList = datumList;
     }
+
+    public void onDestroy() {
+        if (datumList != null) {
+            datumList = null;
+        }
+    }
 }

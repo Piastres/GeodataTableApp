@@ -1,9 +1,116 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".activities.GeodataActivity">
+    <com.google.android.material.appbar.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:theme="@style/ThemeOverlay.AppCompat.ActionBar">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <androidx.appcompat.widget.Toolbar
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:minHeight="?attr/actionBarSize">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                style="@style/Divider8pStyle">
+                <TextView
+                    android:id="@+id/geodataIconBack"
+                    android:textSize="@dimen/text_title_size"
+                    style="@style/TextIconStyle"
+                    android:textColor="@color/colorWhite"
+                    android:text="@string/ic_arrow_left"/>
+            </LinearLayout>
+
+        </androidx.appcompat.widget.Toolbar>
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <LinearLayout
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="@dimen/margin_20p"
+        style="@style/Divider20pStyle"
+        android:orientation="vertical"
+        android:useDefaultMargins="true"
+        android:alignmentMode="alignBounds"
+        android:columnOrderPreserved="false">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            style="@style/Divider20pStyle"
+            android:orientation="horizontal">
+            <ImageView
+                android:id="@+id/geodataImg"
+                style="@style/ImageStyle"
+                android:contentDescription="@string/geodata_list_activity_img" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                style="@style/Divider8pStyle"
+                android:gravity="center_vertical"
+                android:orientation="vertical">
+                <TextView
+                    android:id="@+id/geodataName"
+                    style="@style/GeodataItemNameStyle"/>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    style="@style/Divider8pStyle"
+                    android:orientation="horizontal">
+                    <TextView
+                        android:id="@+id/geodataIconId"
+                        style="@style/TextIconStyle"
+                        android:text="@string/ic_circle" />
+                    <TextView
+                        android:id="@+id/geodataId"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"/>
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    style="@style/Divider8pStyle"
+                    android:orientation="horizontal">
+                    <TextView
+                        android:id="@+id/geodataIconCountry"
+                        style="@style/TextIconStyle"
+                        android:text="@string/ic_flag" />
+                    <TextView
+                        android:id="@+id/geodataCountry"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"/>
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    style="@style/Divider8pStyle"
+                    android:orientation="horizontal">
+                    <TextView
+                        android:id="@+id/geodataIconCoordinates"
+                        style="@style/TextIconStyle"
+                        android:text="@string/ic_gps" />
+                    <TextView
+                        android:id="@+id/geodataCoordinates"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="top"
+                        android:maxLines="1"
+                        android:ellipsize="end"/>
+                </LinearLayout>
+            </LinearLayout>
+        </LinearLayout>
+
+        <com.yandex.mapkit.mapview.MapView
+            android:id="@+id/geodataMapView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+    </LinearLayout>
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

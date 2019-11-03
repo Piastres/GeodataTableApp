@@ -14,10 +14,11 @@ import android.widget.ProgressBar;
 import com.piastres.geodatatableapp.R;
 import com.piastres.geodatatableapp.adapters.GeodataListAdapter;
 import com.piastres.geodatatableapp.controllers.ConnectionController;
-import com.piastres.geodatatableapp.errors.ErrorDescriptor;
+import com.piastres.geodatatableapp.fragments.RequestErrorFragment;
 import com.piastres.geodatatableapp.models.Datum;
 import com.piastres.geodatatableapp.models.GeodataResponse;
 import com.piastres.geodatatableapp.models.SavedData;
+import com.piastres.geodatatableapp.utils.ErrorDescriptorUtil;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -26,6 +27,9 @@ import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
 
 public class GeodataListActivity extends AppCompatActivity {
+
+    ProgressBar progressBar;
+    RecyclerView recyclerView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,10 +45,12 @@ public class GeodataListActivity extends AppCompatActivity {
             code = getIntent().getExtras().getString("USER_CODE");
         }
 
+        progressBar = findViewById(R.id.geodataListProgressBar);
         NestedScrollView scroller = findViewById(R.id.geodataListScroller);
-        RecyclerView recyclerView = findViewById(R.id.geodataList);
+        recyclerView = findViewById(R.id.geodataList);
         recyclerView.setNestedScrollingEnabled(false);
-        GeodataListAdapter adapter = new GeodataListAdapter(this, savedData.getDatumList(), position -> {
+        GeodataListAdapter adapter = new GeodataListAdapter(this,
+                                                            savedData.getDatumList(), position -> {
             Intent intent = new Intent(this, GeodataActivity.class);
             Bundle bundle = new Bundle();
             bundle.putSerializable("GEODATA_ITEM", savedData.getDatumList().get(position));
@@ -57,7 +63,8 @@ public class GeodataListActivity extends AppCompatActivity {
         getGeodataList(code, savedData.getPage(), adapter);
 
         String finalCode = code;
-        scroller.setOnScrollChangeListener((NestedScrollView.OnScrollChangeListener) (v, scrollX, scrollY, oldScrollX, oldScrollY) -> {
+        scroller.setOnScrollChangeListener((NestedScrollView.OnScrollChangeListener)
+                (v, scrollX, scrollY, oldScrollX, oldScrollY) -> {
             if (scrollY == (v.getChildAt(0).getMeasuredHeight() - v.getMeasuredHeight())) {
                 int page = savedData.getPage();
                 if (page != -1) {
@@ -75,18 +82,11 @@ public class GeodataListActivity extends AppCompatActivity {
                 .subscribeOn(Schedulers.io())
                 .doOnSubscribe(__ -> setProgressBarVisible(true))
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(geodataResponse -> {
-                    updateListAdapter(geodataResponse, adapter);
-                }
-                        ,
+                .subscribe(geodataResponse -> updateListAdapter(geodataResponse, adapter),
                         error -> {
-                            /**
-                             * TODO: show errorDialogFragment
-                             */
+                            showErrorDialogFragment(ErrorDescriptorUtil.checkError(error));
                             setPageDisable();
                             setProgressBarVisible(false);
-//                            ErrorDescriptor errorDescriptor = new ErrorDescriptor();
-//                            showErrorDialogFragment(errorDescriptor.checkError(error));
                         }
                 );
     }
@@ -97,7 +97,6 @@ public class GeodataListActivity extends AppCompatActivity {
     }
 
     private void setProgressBarVisible(boolean isVisible) {
-        ProgressBar progressBar = findViewById(R.id.geodataListProgressBar);
         if (isVisible) {
             progressBar.setVisibility(View.VISIBLE);
         } else {
@@ -105,7 +104,16 @@ public class GeodataListActivity extends AppCompatActivity {
         }
     }
 
-    private void updateListAdapter(GeodataResponse geodataResponse, GeodataListAdapter adapter) {
+    private void showErrorDialogFragment(String error) {
+        Bundle bundle = new Bundle();
+        bundle.putString("ERROR_TITLE", error);
+        RequestErrorFragment requestErrorFragment = new RequestErrorFragment();
+        requestErrorFragment.setArguments(bundle);
+        requestErrorFragment.show(getSupportFragmentManager(), "fragment_request_error");
+    }
+
+    private void updateListAdapter(GeodataResponse geodataResponse,
+                                   GeodataListAdapter adapter) {
         SavedData savedData = SavedData.getInstance();
         if (geodataResponse.getStatus().equals("ok")) {
             List<Datum> datumList = savedData.getDatumList();
@@ -118,4 +126,19 @@ public class GeodataListActivity extends AppCompatActivity {
         }
         setProgressBarVisible(false);
     }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        finishAffinity();
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+
+        recyclerView.setAdapter(null);
+        SavedData.getInstance().onDestroy();
+    }
+
 }

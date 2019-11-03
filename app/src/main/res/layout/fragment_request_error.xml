@@ -7,35 +7,35 @@
     tools:context=".fragments.LoginErrorFragment">
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
-        app:contentPadding="@dimen/margin_bottom_20p"
+        app:contentPadding="@dimen/margin_20p"
         android:padding="@dimen/cardview_default_elevation"
         android:layout_height="wrap_content" >
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:showDividers="middle"
-            android:divider="@drawable/divider8p"
+            style="@style/Divider8pStyle"
             android:orientation="vertical">
             <ImageView
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/edit_text_layout_height"
-                android:layout_marginBottom="@dimen/margin_bottom_20p"
+                android:layout_marginBottom="@dimen/margin_20p"
+                android:contentDescription="@string/geodata_list_activity_img"
                 android:src="@drawable/ic_close" />
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:gravity="center_horizontal"
+                android:gravity="center"
                 android:text="@string/login_error"
-                style="@style/GeodataItemTitle"/>
+                style="@style/ErrorDialogTitleStyle"/>
             <TextView
                 android:id="@+id/requestErrorTitle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center_horizontal"
-                android:layout_marginBottom="@dimen/margin_bottom_20p" />
+                android:layout_marginBottom="@dimen/margin_20p" />
             <Button
                 android:id="@+id/requestErrorDialogButton"
-                style="@style/ButtonWithoutBackground"
+                style="@style/ButtonWithoutBackgroundStyle"
                 android:textColor="@color/colorPrimaryDark"
                 android:text="@string/login_ok"
                 android:background="@drawable/login_error_round_button" />

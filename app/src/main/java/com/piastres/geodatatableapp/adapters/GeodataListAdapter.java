@@ -19,6 +19,7 @@ import com.bumptech.glide.request.RequestOptions;
 import com.piastres.geodatatableapp.R;
 import com.piastres.geodatatableapp.activities.GeodataListActivity;
 import com.piastres.geodatatableapp.models.Datum;
+import com.piastres.geodatatableapp.utils.RoundedDoubleUtils;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
@@ -31,7 +32,8 @@ public class GeodataListAdapter extends
     private List<Datum> datumList;
     private ListAdapterListener mListener;
 
-    public GeodataListAdapter (Activity activity, List<Datum> datumList, ListAdapterListener mListener){
+    public GeodataListAdapter (Activity activity, List<Datum> datumList,
+                               ListAdapterListener mListener){
         this.activity = (GeodataListActivity) activity;
         this.datumList = datumList;
         this.mListener = mListener;
@@ -43,7 +45,8 @@ public class GeodataListAdapter extends
 
     @NonNull
     @Override
-    public GeodataListAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public GeodataListAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent,
+                                                            int viewType) {
         View view = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.geodata_item, parent, false);
 
@@ -57,7 +60,7 @@ public class GeodataListAdapter extends
                 .getAssets(), "fa_solid.ttf" );
         holder.textIcon.setTypeface(font);
 
-        String IMG_URL = "https://github.com/Piastres/geodata-table-app/blob/master/app/src/main/res/drawable/user_photo.jpg?raw=true";
+        String IMG_URL = "https://image.freepik.com/free-vector/illustration-gps-navigation_53876-6971.jpg";
 
         Glide.with(activity)
                 .load(IMG_URL)
@@ -68,19 +71,15 @@ public class GeodataListAdapter extends
                 .into(holder.image);
 
         Datum datum = datumList.get(position);
-        String coordinates = getRoundedDouble(datum.getLat()) + ", "
-                                                + getRoundedDouble(datum.getLon());
+        String coordinates = RoundedDoubleUtils.getRoundedDouble(datum.getLat()) + ", "
+                                                + RoundedDoubleUtils.getRoundedDouble(datum.getLon());
 
         holder.textTitle.setText(datum.getName());
-        holder.textCordinates.setText(coordinates);
+        holder.textCoordinates.setText(coordinates);
 
         holder.layout.setOnClickListener(v -> {
             mListener.onClickSwitch(position);
         });
-
-//        if (position == datumList.size() - 1) {
-//            holder.viewLine.setVisibility(View.INVISIBLE);
-//        }
     }
 
     @Override
@@ -88,6 +87,7 @@ public class GeodataListAdapter extends
         if (datumList == null) {
             return 0;
         }
+
         return datumList.size();
     }
 
@@ -95,7 +95,7 @@ public class GeodataListAdapter extends
         LinearLayout layout;
         ImageView image;
         TextView textTitle;
-        TextView textCordinates;
+        TextView textCoordinates;
         TextView textIcon;
         View viewLine;
 
@@ -103,19 +103,11 @@ public class GeodataListAdapter extends
             super(itemView);
             layout = itemView.findViewById(R.id.geodataItemLayout);
             image = itemView.findViewById(R.id.geodataItemImg);
-            textTitle = itemView.findViewById(R.id.geodataItemTitle);
-            textCordinates = itemView.findViewById(R.id.geodataItemCoordinates);
+            textTitle = itemView.findViewById(R.id.geodataItemName);
+            textCoordinates = itemView.findViewById(R.id.geodataItemCoordinates);
             textIcon = itemView.findViewById(R.id.geodataListItemIcon);
             viewLine = itemView.findViewById(R.id.geodataItemLine);
         }
-    }
-
-    private double getRoundedDouble(double value) {
-        BigDecimal convertedToBigDecimal = new BigDecimal(Double.toString(value));
-        convertedToBigDecimal = convertedToBigDecimal.setScale(4,
-                                                                    RoundingMode.HALF_UP);
-
-        return convertedToBigDecimal.doubleValue();
     }
 
     public void dataChanged(List<Datum> changedDatumList){

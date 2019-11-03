@@ -6,6 +6,7 @@
     android:layout_height="match_parent"
     tools:context=".activities.LoginActivity"
     android:background="@color/colorWhite">
+
     <ImageView
         android:layout_width="match_parent"
         android:layout_height="@dimen/login_activity_img_height"
@@ -34,8 +35,8 @@
         <ProgressBar
             android:id="@+id/loginActivityProgressBar"
             android:layout_gravity="center_horizontal"
-            android:layout_marginBottom="@dimen/margin_20p"
             android:visibility="gone"
+            android:layout_marginBottom="@dimen/margin_20p"
             android:layout_width="@dimen/login_progress_bar_size"
             android:layout_height="@dimen/login_progress_bar_size"/>
         <LinearLayout
@@ -52,8 +53,8 @@
                 android:id="@+id/loginActivityUsername"
                 style="@style/LoginEditText"
                 android:inputType="text"
-                tools:ignore="LabelFor"
-                android:importantForAutofill="no" />
+                android:autofillHints="@string/login_activity_login"
+                tools:ignore="LabelFor" />
         </LinearLayout>
 
         <LinearLayout
@@ -71,8 +72,8 @@
                 android:id="@+id/loginActivityPassword"
                 style="@style/LoginEditText"
                 android:inputType="textPassword"
-                tools:ignore="LabelFor"
-                android:importantForAutofill="no" />
+                android:autofillHints="@string/login_activity_password"
+                tools:ignore="LabelFor" />
         </LinearLayout>
         <Button
             android:id="@+id/loginActivityButton"

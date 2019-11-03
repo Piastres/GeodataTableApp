@@ -18,40 +18,54 @@
         <item name="android:layout_height">wrap_content</item>
         <item name="android:layout_gravity">center_vertical</item>
     </style>
-    <style name="ButtonWithoutBackground">
+    <style name="ButtonWithoutBackgroundStyle">
         <item name="android:layout_width">@dimen/button_width120p</item>
         <item name="android:layout_height">@dimen/edit_text_layout_height</item>
         <item name="android:layout_gravity">center_horizontal</item>
         <item name="android:textStyle">bold</item>
     </style>
-    <style name="GeodataItemTitle">
+    <style name="GeodataItemNameStyle">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:gravity">center_vertical</item>
-        <item name="android:ellipsize">end</item>
         <item name="android:paddingEnd">@dimen/edittext_padding</item>
         <item name="android:textSize">20sp</item>
         <item name="android:textStyle">bold</item>
-        <item name="android:maxLines">1</item>
+    </style>
+    <style name="ErrorDialogTitleStyle">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:gravity">center</item>
+        <item name="android:textSize">20sp</item>
+        <item name="android:textStyle">bold</item>
     </style>
     <style name="ProgressBarStyle">
         <item name="android:indeterminateTint">@color/colorWhite</item>
         <item name="android:layout_width">@dimen/progress_bar_size</item>
         <item name="android:layout_height">@dimen/progress_bar_size</item>
-        <item name="android:layout_marginStart">@dimen/progress_bar_margin</item>
-    </style>
-    <style name="GeodataListActivityTitle">
-        <item name="android:textColor">@color/colorWhite</item>
-        <item name="android:layout_width">match_parent</item>
-        <item name="android:layout_height">match_parent</item>
-        <item name="android:gravity">center_vertical</item>
-        <item name="android:textSize">18sp</item>
-        <item name="android:textStyle">bold</item>
     </style>
     <style name="TextIconStyle">
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:gravity">top</item>
+    </style>
+    <style name="ImageStyle">
+        <item name="android:layout_width">@dimen/image_size</item>
+        <item name="android:layout_height">@dimen/image_size</item>
+        <item name="android:layout_gravity">center</item>
+    </style>
+    <style name="Divider8pStyle">
+        <item name="android:showDividers">middle</item>
+        <item name="android:divider">@drawable/divider8p</item>
+    </style>
+    <style name="Divider20pStyle">
+        <item name="android:showDividers">middle</item>
+        <item name="android:divider">@drawable/divider20p</item>
+    </style>
+    <style name="ViewLineStyle">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">1dp</item>
+        <item name="android:background">@color/colorGrayDark</item>
     </style>
 
 </resources>

@@ -13,4 +13,7 @@
     <string name="ic_gps">&#xf3c5;</string>
     <string name="ic_user">&#xf007;</string>
     <string name="ic_key">&#xf084;</string>
+    <string name="ic_flag">&#xf024;</string>
+    <string name="ic_circle">&#xf192;</string>
+    <string name="ic_arrow_left">&#xf060;</string>
 </resources>
